@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/store-demo-account1/mvnw
+/store-demo-account1/mvnw.cmd
+/store-demo-account1/.mvn/

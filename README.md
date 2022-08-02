@@ -23,7 +23,7 @@
 Create sample data for each service. Requires Kafka is running. Endpoints for Zuul, when using Docker Swarm/Stack, are different. See this [Python script](https://github.com/garystafford/storefront-kafka-docker/blob/master/refresh.py) for Zuul endpoints.
 
 ```bash
-# accounts - create & show sample customer accounts
+# accounts - create & show sample customer accounts - 2022/8/1 test okay
 http http://localhost:8085/customers/sample
 http http://localhost:8085/customers/summary
 
@@ -48,7 +48,7 @@ http http://localhost:8095/fulfillments/sample/receive
 
 
 ### Reference Git
-  - Guthub list
+  - GitHub list
     - https://github.com/garystafford/storefront-demo-accounts
     - https://github.com/garystafford/storefront-demo
 
