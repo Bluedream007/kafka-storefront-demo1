@@ -2,12 +2,26 @@
 # Getting Started
 ### kafka-storefront-demo1 project
 ### Description
-* Eventual Consistency with Spring for Apache Kafka: Part 1 of 2 & Part 2
+* ref. link: 
+  Eventual Consistency with Spring for Apache Kafka: Part 1 of 2 & Part 2
   https://itnext.io/eventual-consistency-with-spring-for-apache-kafka-cfbbed450b5e
   https://itnext.io/eventual-consistency-with-spring-for-apache-kafka-part-2-of-2-23bedd512ccf
 
+* Overview
+  ![storefront-demo_overall-diagram1](doc/storefront-demo_overall-diagram1.png)
 * Sub-projects
-  - kafka-storefront-demo 1
+  - store-demo-account1 project - Accounts service
+  - store-demo-order1  project - Orders service  
+    
+
+* ordering process diagram - 
+  An abridged view of the storefront ordering process is shown in the diagram below. The arrows represent the exchange of data. Kafka will serve as a means of decoupling services from one another while still ensuring the data is distributed.
+  ![storefront-demo-ordering-process-diagram](doc/storefront-demo-ordering-process-diagram.png)
+
+* event flows of services -
+  The diagram below shows the event flows between sub-systems discussed in the post. The numbering below corresponds to the numbering in the ordering process above. We will look at three event flows 2, 5, and 6. We will simulate event flow 3, the order being created by the Shopping Cart service.
+  ![storefront-demo-event-flows-diagram](doc/storefront-demo-event-flows-diagram.png)
+
     
 ### Build & Run
 
@@ -29,6 +43,7 @@ http http://localhost:8085/customers/summary
 
 # orders - add sample orders to each customer
 http http://localhost:8090/customers/sample/orders
+http http://localhost:8090/customers/summary
 
 # orders - send approved orders to fulfillment service
 http http://localhost:8090/customers/sample/fulfill

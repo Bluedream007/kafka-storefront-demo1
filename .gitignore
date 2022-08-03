@@ -34,3 +34,8 @@ build/
 /store-demo-account1/mvnw
 /store-demo-account1/mvnw.cmd
 /store-demo-account1/.mvn/
+/store-demo-order1/.gitignore
+/store-demo-order1/mvnw
+/store-demo-order1/mvnw.cmd
+/store-demo-order1/test.log
+/store-demo-order1/.mvn/
