@@ -39,3 +39,8 @@ build/
 /store-demo-order1/mvnw.cmd
 /store-demo-order1/test.log
 /store-demo-order1/.mvn/
+/store-demo-fulfillment1/target/
+/store-demo-fulfillment1/.gitignore
+/store-demo-fulfillment1/mvnw
+/store-demo-fulfillment1/mvnw.cmd
+/store-demo-fulfillment1/.mvn/

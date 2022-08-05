@@ -1,6 +1,7 @@
-package com.bluedream.sample.storedemoorder1.config;
+package com.bluedream.sample.storedemofulfillment1.config;
 
-import com.bluedream.sample.storedemoorder1.kafka.Receiver;
+import com.bluedream.sample.storedemofulfillment1.kafka.Receiver;
+import com.bluedream.sample.storedemofulfillment1.model.FulfillmentRequestEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,8 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +60,7 @@ public class ReceiverConfigConfluent implements ReceiverConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        // props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset);
@@ -67,7 +71,19 @@ public class ReceiverConfigConfluent implements ReceiverConfig {
         props.put("retry.backoff.ms", retryBackoffMs);
         props.put("security.protocol", securityProtocol);
         props.put("sasl.jaas.config", saslJaasConfig);
+
          */
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+        // props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, JsonDeserializer.class);
+        props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
+        //props.put(JsonDeserializer.KEY_DEFAULT_TYPE, "com.example.MyKey");
+        // props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
+        props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, StringDeserializer.class.getName());
+        //props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, "com.example.MyValue");
+
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+
 
         return props;
     }
@@ -77,20 +93,40 @@ public class ReceiverConfigConfluent implements ReceiverConfig {
     public ConsumerFactory<String, String> consumerFactory() {
 
         return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
-                new StringDeserializer());
+                                                 new StringDeserializer());
     }
 
+    @Override
     @Bean
-    ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
 
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        //  The Orders service receives messages from more than one topic. The ReceiverConfig class deserializes all messages using the StringDeserializer.
         factory.setMessageConverter(new StringJsonMessageConverter());
+        return factory;
+    }
+
+    /*
+    @Override
+    @Bean
+    public ConsumerFactory<String, FulfillmentRequestEvent> consumerFactory() {
+
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
+                new JsonDeserializer<>(FulfillmentRequestEvent.class));
+    }
+
+    @Override
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, FulfillmentRequestEvent> kafkaListenerContainerFactory() {
+
+        ConcurrentKafkaListenerContainerFactory<String, FulfillmentRequestEvent> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
 
         return factory;
     }
+     */
 
     @Override
     @Bean
