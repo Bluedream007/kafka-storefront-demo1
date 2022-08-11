@@ -4,6 +4,7 @@ import com.bluedream.sample.storedemoaccount1.model.Customer;
 import com.bluedream.sample.storedemoaccount1.respository.CustomerRepository;
 import com.bluedream.sample.storedemoaccount1.utilities.SampleData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ public class CustomerController {
 
     private final CustomerRepository customerRepository;
 
+    @Value("${my-env-name}")
+    private String strEnvName;
+
     @Autowired
     public CustomerController(CustomerRepository customerRepository) {
 
@@ -33,7 +37,7 @@ public class CustomerController {
         customerRepository.deleteAll();
         customerRepository.saveAll(SampleData.createSampleCustomers());
 
-        return new ResponseEntity<>("Sample customer accounts created", HttpStatus.CREATED);
+        return new ResponseEntity<>("Sample customer accounts created in Env: " + strEnvName, HttpStatus.CREATED);
     }
 
     @RequestMapping(path = "/summary", method = RequestMethod.GET)

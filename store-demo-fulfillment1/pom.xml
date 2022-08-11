@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.bluedream.sample</groupId>
     <artifactId>store-demo-fulfillment1</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>store-demo-fulfillment1</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -135,6 +135,37 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+
+            <!-- JIB -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <image>openjdk:17</image>
+                    </from>
+                    <to>
+                        <image>docker.io/charlotte007/${project.artifactId}:${project.version}</image>
+                    </to>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- To build to a Docker daemon -->
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>dockerBuild</goal>
+                        </goals>
+
+                        <!-- uilt and pushed image as charlotte007/store-demo-xxxx:1.0.1-SNAPSHOT
+                        <phase>package</phase>
+                        <goals>
+                          <goal>build</goal>
+                        </goals>
+                        -->
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

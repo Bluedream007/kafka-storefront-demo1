@@ -44,3 +44,7 @@ build/
 /store-demo-fulfillment1/mvnw
 /store-demo-fulfillment1/mvnw.cmd
 /store-demo-fulfillment1/.mvn/
+/docker/X_docker-compose-store-demo-services-all.yml
+/docker/Ref_docker-compose-middleware-All.yml-4-ref
+/docker/accounts7.log
+/docker/Accounts-Logs/

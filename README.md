@@ -31,13 +31,24 @@
   Each of these state change event messaging flows follows the same architectural pattern on the Kafka topic’s producer and consumer sides.
   ![State Change Event Messaging Flows](doc/State Change Event Messaging Flows.png)
 
+* The configuration of Confluent in Docker container
+  The diagram below shows the structure of this sample; there are 2 types of client connections.
+  One client running locally, and the other one running in Docker.
+  ![Configuration_Kafka-listeners_In-Docker](doc/Configuration_Kafka-listeners_In-Docker_p1.png)  
+
     
 ### Build & Run
 
 * Middleware & Environment Setting
 * install & run middleware
-  > cd /home/charlotte-lp/Charlotte/DVP_Java/Java_Test/Kafka/EventDriven-microservices/kafka-storefront-demo1/docker
-  > docker-compose -f docker-compose-middleware-default.yml up -d
+  - the folder of samples
+    > cd /home/charlotte-lp/Charlotte/DVP_Java/Java_Test/Kafka/EventDriven-microservices/kafka-storefront-demo1/docker
+  - run middleware and 3 services  
+    > docker-compose -f docker-compose-store-demo-All.yml up -d
+  - run middleware
+    > docker-compose -f docker-compose-middleware-default.yml up -d
+ 
+
 * [mongo-express](https://github.com/mongo-express/mongo-express)
   Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3 
   - http://localhost:8081/
@@ -78,5 +89,9 @@ http http://localhost:8095/fulfillments/sample/receive
     - https://github.com/garystafford/storefront-demo
 
 ### Reference Documentation
+ - Confluent
+   - [An illustrated example of a Kafka client connecting to a Broker](https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/)
+     - The configuration of Confluent Kafka in Docker container
+       - Resolve problem; java.net.ConnectException: Connection refused
 
 

@@ -71,6 +71,64 @@ services:
     # volumes:
     #  - /var/run/docker.sock:/var/run/docker.sock
 
+  accounts:
+    image: charlotte007/store-demo-account1:1.0.0
+    hostname: accounts1
+    container_name: accounts1
+    ports:
+      - target: 8085
+        published: 8085
+        protocol: tcp
+        mode: host
+    depends_on:
+      - kafka1
+      - mongo
+    environment:
+      MOGODB_HOST: mongo1
+      KAFKA_HOST: broker1
+      LOGGING_LEVEL_ROOT: DEBUG
+    networks:
+      - kafka-net
+
+  orders:
+    image: charlotte007/store-demo-order1:1.0.0
+    ports:
+      - target: 8090
+        published: 8090
+        protocol: tcp
+        mode: host
+    depends_on:
+      - kafka1
+      - mongo
+      - accounts
+    #  - eureka
+    environment:
+      MOGODB_HOST: mongo1
+      KAFKA_HOST: broker1
+      LOGGING_LEVEL_ROOT: DEBUG
+    networks:
+      - kafka-net
+
+  fulfillment:
+    image: charlotte007/store-demo-fulfillment1:1.0.0
+    ports:
+      - target: 8095
+        published: 8095
+        protocol: tcp
+        mode: host
+    depends_on:
+      - kafka1
+      - mongo
+      - accounts
+      - orders
+    #  - eureka
+    environment:
+      MOGODB_HOST: mongo1
+      KAFKA_HOST: broker1
+      LOGGING_LEVEL_ROOT: DEBUG
+    networks:
+      - kafka-net
+
 
 networks:
   kafka-net:
