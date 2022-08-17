@@ -30,6 +30,15 @@
   
   Each of these state change event messaging flows follows the same architectural pattern on the Kafka topic’s producer and consumer sides.
   ![State Change Event Messaging Flows](doc/State Change Event Messaging Flows.png)
+  
+  State Change Event Messaging Flows - Overview Diagram
+  ![store-demo-flow-1](doc/my-draw-io/store-demo-flow-1.png)
+  
+  State Diagram - Overview Diagram
+  ![Store-Demo-StatusDiagram-1](doc/my-draw-io/Store-Demo-StatusDiagram-1.png)
+  
+  Change the data of Customer Active Diagram
+  ![Store-Demo-ActiveDiagram-1](doc/my-draw-io/Store-Demo-ActiveDiagram-1.png)
 
 * The configuration of Confluent in Docker container
   The diagram below shows the structure of this sample; there are 2 types of client connections.
