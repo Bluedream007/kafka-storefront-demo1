@@ -22,24 +22,30 @@
   The diagram below shows the event flows between sub-systems discussed in the post. The numbering below corresponds to the numbering in the ordering process above. We will look at three event flows 2, 5, and 6. We will simulate event flow 3, the order being created by the Shopping Cart service.
   ![storefront-demo-event-flows-diagram](doc/storefront-demo-event-flows-diagram.png)
 
+### Diagrams
 * State Change Event Messaging Flows - 
   There are three state change event messaging flows illustrated in this post.
   - Changes to a Customer triggers an event message produced by the Accounts service, which is published on the accounts.customer.change Kafka topic and consumed by the Orders service;
   - Order Approved triggers an event message produced by the Orders service, which is published on the orders.order.fulfill Kafka topic, and is consumed by the Fulfillment service;
   - Changes to the status of an Order triggers an event message produced by the Fulfillment Service, which is published on the fulfillment.order.change Kafka topic, and is consumed by the Orders service;
   
-  Each of these state change event messaging flows follows the same architectural pattern on the Kafka topic’s producer and consumer sides.
+* Each of these state change event messaging flows follows the same architectural pattern on the Kafka topic’s producer and consumer sides.
   ![State Change Event Messaging Flows](doc/State Change Event Messaging Flows.png)
   
-  State Change Event Messaging Flows - Overview Diagram
+* State Change Event Messaging Flows - Overview Diagram
   ![store-demo-flow-1](doc/my-draw-io/store-demo-flow-1.png)
   
-  State Diagram - Overview Diagram
+* State Diagram - Overview Diagram
   ![Store-Demo-StatusDiagram-1](doc/my-draw-io/Store-Demo-StatusDiagram-1.png)
   
-  Change the data of Customer Active Diagram
+* Sequence Diagrams - Order States Change
+  ![Store-Demo-SequenceDiagram-1](doc/my-draw-io/Store-Demo-SequenceDiagram-1.png)
+  
+
+* Change the data of Customer Active Diagram
   ![Store-Demo-ActiveDiagram-1](doc/my-draw-io/Store-Demo-ActiveDiagram-1.png)
 
+### Configuration 
 * The configuration of Confluent in Docker container
   The diagram below shows the structure of this sample; there are 2 types of client connections.
   One client running locally, and the other one running in Docker.
