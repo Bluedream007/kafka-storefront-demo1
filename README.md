@@ -108,5 +108,13 @@ http http://localhost:8095/fulfillments/sample/receive
    - [An illustrated example of a Kafka client connecting to a Broker](https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc/)
      - The configuration of Confluent Kafka in Docker container
        - Resolve problem; java.net.ConnectException: Connection refused
-
-
+  
+### Tools 
+* Conduktor Tool
+  - download URL
+    https://www.conduktor.io/download/
+  - Configuration 
+    - Cluster name: Local-Kafka-1
+    - Bootstrap Server: localhost:19092
+    - Zookeeper: localhost:2181
+    - Schema Registry: http://localhost:8081/
